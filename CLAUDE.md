@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-file redesign of acslbd.com, the website of Associated Capital Securities Limited (ACSL), a stock brokerage in Chattogram, Bangladesh. Status: draft v2, demo-ready, not launch-ready.
+A single-file redesign of acslbd.com, the website of Associated Capital Securities Limited (ACSL), a stock brokerage in Chattogram, Bangladesh. Status: draft v3, live on GitHub Pages for review, not client-approved for launch.
 
 Files:
 - `acsl-website.html` — the whole site. Inline CSS, ~25 lines of vanilla JS, no build step, no framework, no image files, no server code.
@@ -46,13 +46,20 @@ Search for `<!--` comments to find region boundaries and for `--` to find every 
 - All external links open in a new tab with `rel="noopener"`.
 - Keep the file self-contained. The only network requests are the three Google Fonts families.
 
+## Repository and hosting
+
+- GitHub: https://github.com/zaeemrahman/acsl-website (public). Local clone at `~/Projects/acsl-website`, kept outside iCloud because git inside iCloud causes sync conflicts.
+- Live site: https://zaeemrahman.github.io/acsl-website/ via GitHub Pages from `main`, repo root, no build. Every push to `main` redeploys.
+- `acsl-website.html` in this iCloud folder and `index.html` in the repo are the same file. Edit one, copy to the other, commit and push.
+- Custom domain (later, after client sign-off): add a `CNAME` file containing `acslbd.com`, set A records for the apex to GitHub Pages IPs and a CNAME for `www` to `zaeemrahman.github.io`, leave `clientportal`, `trade` and mail records untouched, then enable "Enforce HTTPS".
+
 ## Published demo (claude.ai artifact)
 
 The live demo is a claude.ai artifact: `https://claude.ai/artifact/UJXddsT4N9MELZLeyvgicc`. Update it in place, never create a new one:
 
 1. `Artifact read` with that `url` to pull the current published version.
 2. Edit the file.
-3. Verify tag balance and reason through both themes.
+3. Verify tag balance and check the page in a browser.
 4. `Artifact publish` with `file_path` = the edited file, `url` = the demo URL, `favicon` = 📈.
 5. Note what changed in the reply and update the Status row in the handoff summary table if it exists in the doc being maintained.
 
@@ -75,6 +82,6 @@ Unresolved as of 19 September 2026. Answers from ACSL override anything in the h
 
 ## Deployment plan
 
-Static host, zero hosting cost. Rename to `index.html`, commit to a Git repo, create a Cloudflare Pages project with no build command and repository root as output, add `acslbd.com` and `www.acslbd.com` as custom domains, update DNS at the registrar. Leave the `clientportal`, `trade`, and email DNS records untouched; those are separate systems this redesign does not cover.
+Done: GitHub Pages, see "Repository and hosting" above. Cloudflare Pages (the handoff's original plan) remains a free alternative if the repo ever needs to be private.
 
 If the site grows past one page, split by anchor into `index.html`, `about.html`, `branches.html`, `help.html` sharing an external stylesheet.
